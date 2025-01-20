@@ -1,23 +1,23 @@
-import PlayerType from "../types/Player";
-
+import {updateMoney, updateMaterials} from "../store/PlayerSlice";
+import { useDispatch } from "react-redux";
 type Material = {
     name: string,
-    player: PlayerType,
-    setPlayer: Function
+    price: number,
+    icon: string
 }
 
-export default function Material({name, player, setPlayer}: Material) {
-  
+export default function Material({name, price, icon}: Material) {
+    const dispatch = useDispatch();
     function buyMaterial() {
-        console.log(`Buying ${name}`);
-        const updatedMaterials = { ...player.materials };
-        updatedMaterials[name] += 1;
-        setPlayer({materials: updatedMaterials, money: player.money - 10});
+        dispatch(updateMaterials({name: name, amount: 1}));
+        dispatch(updateMoney(-price))
+
     }
     return (
-    <>
-    <p>Name: {name}</p>      
+    <div className="material">
+    <h2><span><img src={icon} alt={name} /></span>Name: {name}</h2>
+    <p>Price: {price}</p>      
     <button onClick={buyMaterial}>Buy</button>
-    </>
+    </div>
   )
 }
