@@ -13,68 +13,68 @@ import wires from '../assets/wires.png';
 export default [
     {
         "name": "Wood",
-        "price": 10,
-        "quantity": 100,
+        "price": 5,
+        "quantity": 20,
         "icon": wood
     },
     {
         "name": "Stone",
-        "price": 20,
-        "quantity": 100,
+        "price": 10,
+        "quantity": 20,
         "icon": stone
     },
     {
         "name": "Clay",
-        "price": 30,
-        "quantity": 100,
+        "price": 15,
+        "quantity": 20,
         "icon": clay
     },
     {
         "name": "Metal",
-        "price": 40,
-        "quantity": 100,
+        "price": 25,
+        "quantity": 20,
         "icon": metal
     },
     {
         "name": "Glass",
-        "price": 50,
-        "quantity": 100,
+        "price": 30,
+        "quantity": 20,
         "icon": glass
     },
     {
         "name": "Sand",
-        "price": 60,
-        "quantity": 100,
+        "price": 35,
+        "quantity": 20,
         "icon": sand
     },
     {
         "name": "Water",
-        "price": 70,
-        "quantity": 100,
+        "price": 5,
+        "quantity": 20,
         "icon": water
     },
     {
         "name": "Roofing",
-        "price": 80,
-        "quantity": 100,
+        "price": 40,
+        "quantity": 20,
         "icon": roofing
     },
     {
         "name": "Paint",
-        "price": 90,
-        "quantity": 100,
+        "price": 20,
+        "quantity": 20,
         "icon": paint
     },
     {
         "name": "Pipes",
-        "price": 100,
-        "quantity": 100,
+        "price": 35,
+        "quantity": 20,
         "icon": pipes
     },
     {
         "name": "Wires",
-        "price": 110,
-        "quantity": 100,
+        "price": 30,
+        "quantity": 20,
         "icon": wires
     }
 ]

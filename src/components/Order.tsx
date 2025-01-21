@@ -3,27 +3,32 @@ import PlayerType from '../types/Player';
 import OrderType from '../types/Order';
 import {useDispatch, useSelector} from 'react-redux';
 import { updateMoney, updateMaterials} from '../store/PlayerSlice';
+
 export default function OrderComponent({order}: {order: OrderType}) {
     const [timeToDone, setTimeToDone] = useState(0);
     const player = useSelector((state: {player: PlayerType}) => state.player);
+
     const dispatch = useDispatch();
+    
+    const materialsNeededs = order.materials_needed;
+    const playerMaterials = player.materials;
+    const materialsNeeded = materialsNeededs.find((material) => {
+      return material.amount > playerMaterials[material.name];
+    });
+    const canTakeOrder = !materialsNeeded || materialsNeeded.amount <= playerMaterials[materialsNeeded.name];
+    const isTimerActive = timeToDone > 0;
+
     function takeOrder() {
 
-        const materialsNeeded = order.materials_needed;
-        const playerMaterials = player.materials;
-        
-        for (const material in materialsNeeded) {
-          if (materialsNeeded[material] > playerMaterials[material]) {
-          console.log(`Not enough ${material}`);
+        if(materialsNeeded && materialsNeeded.amount > playerMaterials[materialsNeeded.name]) {
+          console.log('not enough materials');
           return;
-          }
         }
     
-    
         let time: number = order.time_to_complete * 60 * 1000;
-          for (const material in materialsNeeded) {
-            dispatch(updateMaterials({name: material, amount: -materialsNeeded[material]}));
-          }
+          materialsNeededs.forEach((material) => {
+            dispatch(updateMaterials({name: material.name, amount: -material.amount}));
+          })
         let a = setInterval(() => {
           setTimeToDone(time/1000);
           if(time <= 0) {
@@ -37,17 +42,56 @@ export default function OrderComponent({order}: {order: OrderType}) {
   
     }
     return (
-    <div className='order'>
-     <p>Time to done: {timeToDone}s</p>
-      <button onClick={takeOrder}>Take a order</button>
-      <div className="order">
-        <h2>{order.name}</h2>
-        <ul>
-          {Object.keys(order.materials_needed).map((material, index) => {
-            return <li key={index}>{material}: {order.materials_needed[material]}</li>
-          })}
-        </ul>
-      </div>  
+    <div className='order-card'>
+        <div className='order-header'>
+            <h2>{order.name}</h2>
+            <div className='order-payment'>
+                <span>💰</span>
+                <span>${order.payment}k</span>
+            </div>
+        </div>
+        
+        <div className='order-time'>
+            <span>⏱️ Time to Complete: {order.time_to_complete} mins</span>
+        </div>
+        
+        <div className='order-materials'>
+            <h3>Materials Required:</h3>
+            <ul>
+                {order.materials_needed.map((material) => {
+                    const playerMaterial = player.materials[material.name] || 0;
+                    const isEnough = playerMaterial >= material.amount;
+                    
+                    return (
+                        <li key={material.name} className={isEnough ? 'material-sufficient' : 'material-insufficient'}>
+                            <div className='material-icon-small'>
+                                <img src={material.icon} alt={material.name} />
+                            </div>
+                            <span className='material-name'>{material.name}</span>
+                            <span className='material-quantity'>
+                                {playerMaterial}/{material.amount}
+                            </span>
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
+        
+        <div className='order-footer'>
+            {isTimerActive ? (
+                <div className='order-timer'>
+                    <span>⏳ Time Remaining: {timeToDone}s</span>
+                </div>
+            ) : (
+                <button 
+                    onClick={takeOrder} 
+                    disabled={!canTakeOrder}
+                    className={canTakeOrder ? 'order-button' : 'order-button disabled'}
+                >
+                    {canTakeOrder ? 'Take Order' : 'Insufficient Materials'}
+                </button>
+            )}
+        </div>
     </div>
   )
 }

@@ -23,16 +23,28 @@ const initialState : PlayerType = {
 
 export const PlayerSlice = createSlice({
     name: "player",
-    initialState,
+    initialState: JSON.parse(localStorage.getItem('player') || JSON.stringify(initialState)),
     reducers: {
         updateMaterials: (state, action: PayloadAction<{name: string, amount: number}>) => {
             state.materials[action.payload.name] += action.payload.amount;
         },
         updateMoney: (state, action: PayloadAction<number>) => {
             state.money += action.payload;
+        },
+        updateName: (state, action: PayloadAction<string>) => {
+            state.name = action.payload;
         }
-    }
+    },
+    extraReducers: (builder) => {
+        builder.addMatcher(
+            (action) => action.type.startsWith('player/'),
+            (state, action) => {
+                localStorage.setItem('player', JSON.stringify(state))
+            }
+        )
+    },
+
 })
 
 
-export const { updateMaterials, updateMoney} = PlayerSlice.actions
+export const { updateMaterials, updateMoney, updateName} = PlayerSlice.actions

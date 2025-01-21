@@ -6,7 +6,7 @@ export default function ShopPage() {
         <div>
  <div className='materials-block'>
       {materials && materials.map((material) => {
-        return <Material key={material.name} name={material.name} price={material.price} icon={material.icon}/>
+        return <Material key={material.name} name={material.name} quantity={material.quantity} price={material.price} icon={material.icon}/>
       })}
       </div>
 
