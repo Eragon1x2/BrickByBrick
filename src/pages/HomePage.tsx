@@ -2,7 +2,6 @@
 import PlayerComponent from '../components/Player';
 import {useEffect, useState} from 'react';
 import Modal from '../components/Modal';
-
 export default function HomePage() {
     const [modal, showModal] = useState(true);
 

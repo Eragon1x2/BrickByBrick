@@ -1,46 +1,45 @@
-import {useState} from 'react'
 import PlayerType from '../types/Player';
 import OrderType from '../types/Order';
-import {useDispatch, useSelector} from 'react-redux';
-import { updateMoney, updateMaterials} from '../store/PlayerSlice';
+import {useSelector} from 'react-redux';
+import { Link } from 'react-router';
 
 export default function OrderComponent({order}: {order: OrderType}) {
-    const [timeToDone, setTimeToDone] = useState(0);
+    // const [timeToDone, setTimeToDone] = useState(0);
     const player = useSelector((state: {player: PlayerType}) => state.player);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     
-    const materialsNeededs = order.materials_needed;
-    const playerMaterials = player.materials;
-    const materialsNeeded = materialsNeededs.find((material) => {
-      return material.amount > playerMaterials[material.name];
-    });
-    const canTakeOrder = !materialsNeeded || materialsNeeded.amount <= playerMaterials[materialsNeeded.name];
-    const isTimerActive = timeToDone > 0;
+    // const materialsNeededs = order.materials_needed;
+    // const playerMaterials = player.materials;
+    // const materialsNeeded = materialsNeededs.find((material) => {
+    //   return material.amount > playerMaterials[material.name];
+    // });
+    // const canTakeOrder = !materialsNeeded || materialsNeeded.amount <= playerMaterials[materialsNeeded.name];
+    // const isTimerActive = timeToDone > 0;
 
-    function takeOrder() {
+    // function takeOrder() {
 
-        if(materialsNeeded && materialsNeeded.amount > playerMaterials[materialsNeeded.name]) {
-          console.log('not enough materials');
-          return;
-        }
+    //     if(materialsNeeded && materialsNeeded.amount > playerMaterials[materialsNeeded.name]) {
+    //       console.log('not enough materials');
+    //       return;
+    //     }
     
-        let time: number = order.time_to_complete * 60 * 1000;
-          materialsNeededs.forEach((material) => {
-            dispatch(updateMaterials({name: material.name, amount: -material.amount}));
-          })
-        let a = setInterval(() => {
-          setTimeToDone(time/1000);
-          if(time <= 0) {
-          clearInterval(a);
-          console.log("Order completed");
-          dispatch(updateMoney(order.payment));
-          };
-          time -= 1000;
-        }, 1000);
+    //     let time: number = order.time_to_complete * 60 * 1000;
+    //       materialsNeededs.forEach((material) => {
+    //         dispatch(updateMaterials({name: material.name, amount: -material.amount}));
+    //       })
+    //     let a = setInterval(() => {
+    //       setTimeToDone(time/1000);
+    //       if(time <= 0) {
+    //       clearInterval(a);clearInterval(a);
+    //       console.log("Order completed");
+    //       dispatch(updateMoney(order.payment));
+    //       };
+    //       time -= 1000;
+    //     }, 1000);
         
   
-    }
+    // }
     return (
     <div className='order-card'>
         <div className='order-header'>
@@ -77,21 +76,7 @@ export default function OrderComponent({order}: {order: OrderType}) {
             </ul>
         </div>
         
-        <div className='order-footer'>
-            {isTimerActive ? (
-                <div className='order-timer'>
-                    <span>⏳ Time Remaining: {timeToDone}s</span>
-                </div>
-            ) : (
-                <button 
-                    onClick={takeOrder} 
-                    disabled={!canTakeOrder}
-                    className={canTakeOrder ? 'order-button' : 'order-button disabled'}
-                >
-                    {canTakeOrder ? 'Take Order' : 'Insufficient Materials'}
-                </button>
-            )}
-        </div>
+        <Link to={'/orders/' + order.id} className='order-button'>Take a order</Link>
     </div>
   )
 }

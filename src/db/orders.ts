@@ -20,7 +20,8 @@ export default [
             {"name": "Clay", "amount": 3, "icon": clay}
         ],
         "time_to_complete": 2,
-        "payment": 75
+        "payment": 75,
+        "description": ""
     },
     {
         "id": 2,

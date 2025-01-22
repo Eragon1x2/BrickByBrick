@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage'
 import OrdersPage from './pages/Orders'
 import RootPage from './pages/Root'
 import ShopPage from './pages/ShopPage'
+import OrderPage from './pages/OrderPage'
 
 /*oncrete
 Wood – For walls, floors, and roofs.
@@ -29,6 +30,7 @@ function App() {
     <Route index element={<HomePage />} />
     <Route path='/orders' element={<OrdersPage />} />
     <Route path='/shop' element={<ShopPage />} />
+    <Route path='/orders/:id' element={<OrderPage />} />
     </Route>
     </Routes>
    </BrowserRouter> 
