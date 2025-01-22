@@ -25,9 +25,9 @@ export default function OrderComponent({order}: {order: OrderType}) {
     //     }
     
     //     let time: number = order.time_to_complete * 60 * 1000;
-    //       materialsNeededs.forEach((material) => {
-    //         dispatch(updateMaterials({name: material.name, amount: -material.amount}));
-    //       })
+        //   materialsNeededs.forEach((material) => {
+        //     dispatch(updateMaterials({name: material.name, amount: -material.amount}));
+        //   })
     //     let a = setInterval(() => {
     //       setTimeToDone(time/1000);
     //       if(time <= 0) {

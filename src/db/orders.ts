@@ -19,9 +19,9 @@ export default [
             {"name": "Stone", "amount": 10, "icon": stone},
             {"name": "Clay", "amount": 3, "icon": clay}
         ],
-        "time_to_complete": 2,
+        "time_to_complete": 0.2,
         "payment": 75,
-        "description": ""
+        "description": "A cozy starter home for new residents, providing basic shelter and comfort."
     },
     {
         "id": 2,
@@ -33,7 +33,8 @@ export default [
             {"name": "Roofing", "amount": 3, "icon": roofing}
         ],
         "time_to_complete": 4,
-        "payment": 150
+        "payment": 150,
+        "description": "A modern educational facility to support learning and community development."
     },
     {
         "id": 3,
@@ -45,7 +46,8 @@ export default [
             {"name": "Glass", "amount": 3, "icon": glass}
         ],
         "time_to_complete": 6,
-        "payment": 250
+        "payment": 250,
+        "description": "A critical infrastructure project to ensure clean water supply for the community."
     },
     {
         "id": 4,
@@ -57,7 +59,8 @@ export default [
             {"name": "Sand", "amount": 2, "icon": sand}
         ],
         "time_to_complete": 3,
-        "payment": 120
+        "payment": 120,
+        "description": "A cultural hub to showcase local art and foster creativity in the community."
     },
     {
         "id": 5,
@@ -68,7 +71,8 @@ export default [
             {"name": "Stone", "amount": 5, "icon": stone}
         ],
         "time_to_complete": 5,
-        "payment": 200
+        "payment": 200,
+        "description": "A key electrical infrastructure to provide reliable power distribution."
     },
     {
         "id": 6,
@@ -80,6 +84,7 @@ export default [
             {"name": "Sand", "amount": 2, "icon": sand}
         ],
         "time_to_complete": 3,
-        "payment": 120
+        "payment": 120,
+        "description": "A recreational facility to promote fitness and provide a cool retreat for residents."
     }    
 ];

@@ -8,5 +8,6 @@ export default interface OrderType {
         name: string,
         amount: number,
         icon: string
-    }[]
+    }[],
+    description: string
   }

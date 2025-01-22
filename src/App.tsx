@@ -5,6 +5,7 @@ import OrdersPage from './pages/Orders'
 import RootPage from './pages/Root'
 import ShopPage from './pages/ShopPage'
 import OrderPage from './pages/OrderPage'
+import { ToastContainer } from 'react-toastify'
 
 /*oncrete
 Wood – For walls, floors, and roofs.
@@ -25,6 +26,7 @@ function App() {
 
   return (
    <BrowserRouter>
+     <ToastContainer />
     <Routes>
     <Route path='/' element={<RootPage />}>
     <Route index element={<HomePage />} />
