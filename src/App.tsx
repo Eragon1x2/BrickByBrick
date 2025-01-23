@@ -6,6 +6,7 @@ import RootPage from './pages/Root'
 import ShopPage from './pages/ShopPage'
 import OrderPage from './pages/OrderPage'
 import { ToastContainer } from 'react-toastify'
+import EarnSomeMaterials from './pages/EarnSomeMaterials'
 
 /*oncrete
 Wood – For walls, floors, and roofs.
@@ -33,6 +34,7 @@ function App() {
     <Route path='/orders' element={<OrdersPage />} />
     <Route path='/shop' element={<ShopPage />} />
     <Route path='/orders/:id' element={<OrderPage />} />
+    <Route path='/earn-materials' element={<EarnSomeMaterials></EarnSomeMaterials>}></Route>
     </Route>
     </Routes>
    </BrowserRouter> 

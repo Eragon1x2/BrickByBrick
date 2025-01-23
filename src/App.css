@@ -56,7 +56,6 @@ header {
   color: var(--text-color);
 }
 
-.player:hover,
 .material:hover,
 .order:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -852,4 +851,128 @@ header a:hover {
         min-height: 44px;
         min-width: 44px;
     }
+}
+
+
+
+.memory-game .cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 550px;
+  margin: 0 auto;
+}
+.memory-game .cards img {
+  width: 100%;
+  height: 100%;
+}
+
+.memory-game .card  {
+  background-color: rgb(85, 85, 85);
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+
+}
+.memory-game .card > img {
+  display: none;
+  transition: display 0.3s ease;
+}
+
+.memory-game .card.flipped > img {
+  opacity: 1;
+  display: block;
+  transition: display 0.3 ease;
+}
+
+.memory-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.memory-game h1 {
+    font-family: 'Arial', sans-serif;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.memory-game .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    perspective: 1000px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.memory-game .card {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    aspect-ratio: 1/1;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* .memory-game .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+    border-radius: 10px;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    transition: transform 0.6s;
+} */
+
+.memory-game .card > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateY(180deg);
+    max-width: 70%;
+    max-height: 70%;
+    opacity: 0;
+    transition: all 0.6s ease;
+    backface-visibility: hidden;
+}
+
+.memory-game .card.flipped {
+    transform: rotateY(180deg);
+}
+
+
+.memory-game .card.flipped > img {
+    opacity: 1;
+    display: block;
+}
+
+@keyframes matchAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.memory-game .card.matched {
+    animation: matchAnimation 0.5s ease;
+    pointer-events: none;
 }

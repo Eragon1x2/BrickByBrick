@@ -9,6 +9,7 @@ export default function RootPage() {
      <NavLink to="/">Home</NavLink>
      <NavLink to="/orders">Orders</NavLink>
      <NavLink to="/shop">Shop</NavLink>
+     <NavLink to="/earn-materials">Earn Materials</NavLink>
       </header>
         <Outlet></Outlet>
         </div>
