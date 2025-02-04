@@ -3,12 +3,10 @@ import materials from "../db/materials";
 import { useDispatch } from "react-redux";
 import { updateMaterials } from "../store/PlayerSlice";
 import { toast } from "react-toastify";
+import MaterialType from "../types/Material";
 
 // Define type for material
-interface Material {
-    id: number;
-    name: string;
-    icon: string;
+interface Material extends MaterialType {
     isFlipped: boolean;
 }
 
@@ -48,7 +46,7 @@ export default function MemoryGame() {
         // Check for match when two cards are flipped
         if (flippedCards.length === 2) {
             const [firstCard, secondCard] = flippedCards;
-            
+
             if (firstCard.name === secondCard.name) {
                 // Match found
                 setMatchedCards(prev => [...prev, firstCard, secondCard]);
@@ -57,9 +55,9 @@ export default function MemoryGame() {
                 // No match, reset after short delay
                 const timeoutId = setTimeout(() => {
                     // Unflip non-matching cards
-                    setCards(prevCards => prevCards.map(card => 
-                        flippedCards.some(flipped => flipped.id === card.id) 
-                            ? { ...card, isFlipped: false } 
+                    setCards(prevCards => prevCards.map(card =>
+                        flippedCards.some(flipped => flipped.id === card.id)
+                            ? { ...card, isFlipped: false }
                             : card
                     ));
                     setFlippedCards([]);
@@ -85,12 +83,12 @@ export default function MemoryGame() {
                 theme: "light",
             })
             dispatch(updateMaterials({name: materials[material].name, amount: materials[material].quantity}));
-            
+
 
             setFlippedCards([]);
             setMatchedCards([]);
             setCards(shuffleArray(cards));
-            setCards(prevCards => prevCards.map(card => 
+            setCards(prevCards => prevCards.map(card =>
                 card.isFlipped ? { ...card, isFlipped: false } : card
             ));
         }
@@ -99,14 +97,14 @@ export default function MemoryGame() {
     const handleCardClick = (clickedCard: Material) => {
         // Prevent flipping already matched or more than 2 cards
         if (
-            matchedCards.some(card => card.id === clickedCard.id) || 
-            flippedCards.length >= 2 || 
+            matchedCards.some(card => card.id === clickedCard.id) ||
+            flippedCards.length >= 2 ||
             flippedCards.some(card => card.id === clickedCard.id)
         ) return;
 
         // Flip the card
-        setCards(prevCards => 
-            prevCards.map(card => 
+        setCards(prevCards =>
+            prevCards.map(card =>
                 card.id === clickedCard.id ? { ...card, isFlipped: true } : card
             )
         );
@@ -120,8 +118,8 @@ export default function MemoryGame() {
             <h1>Find all the matches</h1>
             <div className="cards">
                 {cards.map((card) => (
-                    <div 
-                        key={card.id} 
+                    <div
+                        key={card.id}
                         className={`card ${card.isFlipped ? 'flipped' : ''} ${matchedCards.some(m => m.id === card.id) ? 'matched' : ''}`}
                         onClick={() => handleCardClick(card)}
                     >

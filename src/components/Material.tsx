@@ -1,16 +1,9 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateMaterials, updateMoney } from '../store/PlayerSlice';
 import { RootState } from '../store/store';
+import MaterialType from '../types/Material';
 
-type Material = {
-    name: string,
-    price: number,
-    icon: string,
-    quantity: number
-}
-
-export default function Material({name, price, icon, quantity}: Material) {
+export default function Material({name, price, icon, quantity}: MaterialType) {
     const dispatch = useDispatch();
     const playerMoney = useSelector((state: RootState) => state.player.money);
     const playerMaterials = useSelector((state: RootState) => state.player.materials);
@@ -32,7 +25,7 @@ export default function Material({name, price, icon, quantity}: Material) {
             <div className='material-icon'>
                 <img src={icon} alt={`${name} icon`} />
             </div>
-            
+
             <div className='material-details'>
                 <h2>{name}</h2>
                 <div className='material-stats'>
@@ -46,13 +39,13 @@ export default function Material({name, price, icon, quantity}: Material) {
                     </div>
                 </div>
             </div>
-            
+
             <div className='material-inventory'>
                 <span>Your Stock: {currentQuantity}</span>
             </div>
-            
-            <button 
-                onClick={buyMaterial} 
+
+            <button
+                onClick={buyMaterial}
                 disabled={playerMoney < price}
                 className={playerMoney >= price ? 'buy-button' : 'buy-button disabled'}
             >

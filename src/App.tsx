@@ -22,7 +22,6 @@ Pipes – For water systems.
 Wires – For electricity.
  */
 
-
 function App() {
 
   return (
@@ -37,7 +36,7 @@ function App() {
     <Route path='/earn-materials' element={<EarnSomeMaterials></EarnSomeMaterials>}></Route>
     </Route>
     </Routes>
-   </BrowserRouter> 
+   </BrowserRouter>
   )
 }
 
